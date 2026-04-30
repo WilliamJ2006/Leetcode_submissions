@@ -3,20 +3,29 @@
  * @return {boolean}
  */
 var isPalindrome = function(s) {
-    const string = s.toLowerCase();
-    let left = 0;
-    let right = string.length-1;
-    while(left <= right) {
-        if(string[left] === string[right] ){
-            left++;
-            right--;
-        } else if (!(/[a-z0-9]/i.test(string[left]))) {
-            left++;
-        } else if (!(/[a-z0-9]/i.test(string[right]))) {
-            right--;
+    const arr = [];
+    const string = s.split('').filter(letter => (/^[a-z0-9]+$/i).test(letter)).join('').toLowerCase();
+    if(string.length <= 2) return string.split('').every(val => val === string[0]);
+    let mid = Math.floor((string.length)/2);
+    let lastPush;
+    for(let i = 0; i < string.length; i++) {
+        if(string.length%2 === 1) {
+            if(i <= mid) {
+                arr.push(string[i]);
+                lastPush = string[i];
+            }
         } else {
-            return false;
+            if(i < mid) {
+                arr.push(string[i]);
+                lastPush = string[i];
+            }
+        }
+        if(i >= mid) {
+            if(lastPush === string[i]) {
+                arr.pop();
+                lastPush = arr[arr.length-1];
+            }
         }
     }
-    return true;
+    return arr.length === 0 ? true : false;
 };
