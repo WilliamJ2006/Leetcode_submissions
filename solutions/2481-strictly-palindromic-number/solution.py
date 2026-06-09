@@ -1,3 +1,3 @@
-class Solution(object):
-    def isStrictlyPalindromic(self, n):
+class Solution:
+    def isStrictlyPalindromic(self, n: int) -> bool:
         return False
