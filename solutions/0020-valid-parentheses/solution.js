@@ -3,20 +3,24 @@
  * @return {boolean}
  */
 var isValid = function(s) {
-    let lastPush;
-    let arr = [];
-    if(s.length < 2) {
-        return false;
+    const obj = {
+        '(': ')',
+        '{': '}',
+        '[': ']'
     }
-    for (let i = 0; i < s.length; i++) { 
-        if(lastPush + s[i] === '()' || lastPush + s[i] === '[]' || lastPush + s[i] === '{}') {
-            arr.pop();
-            lastPush = arr[arr.length-1]
-            continue;
+    if(s.length < 2) return false;
+    const stack = []
+    for(const value of s) {
+        if(obj[value]) {
+            stack.push(value);
+        } else {
+            if(obj[stack[stack.length-1]] === value) {
+                stack.pop();
+            } else {
+                return false;
+            }
         }
-        arr.push(s[i]);
-        lastPush = s[i];
     }
-    return arr.length === 0 ? true : false;
+    return stack.length === 0
 };
 
