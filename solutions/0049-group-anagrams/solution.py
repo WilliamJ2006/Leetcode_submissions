@@ -1,5 +1,11 @@
 class Solution:
-    def groupAnagrams(self, strs: List[str]) -> List[List[str]]:
+    def groupAnagrams(self, strs: list[str]) -> list[list[str]]:
+        """
+        set
+        dict
+        for each make freq map, add freq map to set
+        for 
+        """
         obj = {}
         for i in range(len(strs)):
             sorted_str = ''.join(sorted(strs[i]))
